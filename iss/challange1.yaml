@@ -1,0 +1,31 @@
+---
+- name: Query an Open API
+  hosts: localhost
+  connection: local
+
+  vars:
+    nhlchallange: 'https://statsapi.web.nhl.com/api/v1/teams'
+
+  tasks:
+  - name: Snd an Http Get to API
+    uri:
+      method: GET
+      url: 'https://statsapi.web.nhl.com/api/v1/teams'
+    register: data
+
+  - name: Use debug to show what is inside of our variable
+    debug:
+      msg: "{{ data }}"
+
+  - name: Slice the variable a loop across the JSON data
+    debug:
+      msg: "{{ data.json() }}"
+
+
+  - name: Yse debug with loop 
+    debug:
+      var: item.teamname
+    loop: "{{ data.get('json').get('teams') }}"
+    loop_control:
+      label: "{{ item.itemName }}"
+    
