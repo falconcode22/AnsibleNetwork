@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+"""Alta3 Research | RZFeeser
+   Accessing Open APIs with Python"""
+
+import json
+import requests
+
+
+MAJORTOM = 'http://api.open-notify.org/astros.json'
+
+def main():
+
+   resp = requests.get(MAJORTOM)
+
+   data = resp.json()
+
+   print("\n\nConverted Python data")
+   print(data)
+
+
+   if __name__ '__main__':
+       main()
+ 
+
